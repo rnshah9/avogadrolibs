@@ -1,0 +1,8 @@
+project: avogadrolibs
+target: encodefile
+testsuite:
+  - file://test
+cmds:
+  - cmd: /repo/utilities/encodefile/encodefile @@ /dev/null
+    env:
+      DISABLE_SMOKETEST: '1'
