@@ -7,12 +7,5 @@ COPY . /repo
 WORKDIR /repo/utilities/encodefile
 RUN g++ -o encodefile -O3 encodefile.cxx
 
-RUN mkdir -p /deps
-RUN ldd /repo/utilities/encodefile/encodefile | tr -s '[:blank:]' '\n' | grep '^/' | xargs -I % sh -c 'cp % /deps;'
-
 FROM ubuntu:22.04 as package
-
-COPY --from=builder /deps /deps
-COPY --from=builder /repo/utilities/encodefile/encodefile /repo/utilities/encodefile/encodefile
-ENV LD_LIBRARY_PATH=/deps
-
+COPY --from=builder /repo/utilities/encodefile/encodefile /
